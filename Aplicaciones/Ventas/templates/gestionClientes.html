@@ -1,0 +1,72 @@
+{% extends "./base.html" %}
+
+{% block title %} Ventas {% endblock %}
+
+{% block body %}
+<div class="row">
+    <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4">
+        {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-dismissible alert-success">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <strong class="text-dark">{{ message }}</strong>
+        </div>
+        {% endfor %}
+        {% endif %}
+            <h2>GESTION DE CLIENTES</h2>
+            <div class="card py-2" >
+                <div class="card-body ">
+                    <form action="/registrarCliente/" method="POST">{% csrf_token %}
+                        <div class="form-group py-3">
+                            <input type="text" name="txtId" id="Identificador" class="form-control" placeholder="ID" required>
+                        </div>
+                        <div class="form-group py-3">
+                            <input type="text" name="txtNombre" id="Nombre" class="form-control" placeholder="NOMBRE" required>
+                        </div>
+                        <div class="form-group py-3">
+                            <input type="text" name="txtTel" id="Telefono" class="form-control" maxlength="10" placeholder="TELEFONO" required>
+                        </div>
+                        <div class="form-group py-3">
+                            <input type="number" name="txtEdad" id="Edad" class="form-control" placeholder="Edad" required>
+                        </div>
+                        <div class="form-group py-3">
+                            <button type="submit" class="btn btn-success btn-block text-white">Guardar</button>
+                        </div>
+                        <div class="form-group py-3">
+                            <button type="reset" class="btn  btn-info btn-block text-white">Limpiar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+    </div>
+
+    <div class="col-sm-12 col-md-6 col-lg-8 col-xl-8">
+        <h1>Clientes</h1>
+        <div class="table-responsive py-2">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Nombre</th>
+                        <th>Telefono</th>
+                        <th>Edad</th>
+                        <th colspan="2">OPCIONES</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for c in cliente %}
+                        <tr>
+                            <td>{{c.id}}</td>
+                            <td>{{c.nombre}}</td>
+                            <td>{{c.telefono}}</td>
+                            <td>{{c.edad}}</td>
+                            <td><a href="actualizarCliente/{{c.id}}" class="btn btn-info">Editar Cliente</a></td>
+                            <td><a href="eliminarCliente/{{c.id}}" class="btn btn-danger btnEliminar">Eliminar Cliente</a></td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{%  endblock %}

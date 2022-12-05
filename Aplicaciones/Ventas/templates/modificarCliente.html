@@ -1,0 +1,32 @@
+{% extends "./base.html" %}
+
+{% block title %} Ventas {% endblock %}
+
+{% block body %}
+    <div class="rom">
+        <div class="col-md-4 offset-md-4">
+            <h2>MODIFICACION DE CLIENTES</h2>
+            <div class="card py-2" >
+                <div class="card-body ">
+                    <form action="/editarCliente/" method="POST">{% csrf_token %}
+                        <div class="form-group py-3">
+                            <input type="text" name="txtId" readonly id="Identificador" value="{{cliente.id}}" class="form-control" placeholder="ID" required>
+                        </div>
+                        <div class="form-group py-3">
+                            <input type="text" name="txtNombre" id="Nombre" value="{{cliente.nombre}}" class="form-control" placeholder="NOMBRE" required>
+                        </div>
+                        <div class="form-group py-3">
+                            <input type="text" name="txtTel" id="Telefono" value="{{cliente.telefono}}" class="form-control" maxlength="10" placeholder="TELEFONO" required>
+                        </div>
+                        <div class="form-group py-3">
+                            <input type="number" name="txtEdad" id="Edad" value="{{cliente.edad}}" class="form-control" placeholder="Edad" required>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary btn-lg btn-block text-white">Guardar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
